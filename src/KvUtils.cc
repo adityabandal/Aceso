@@ -359,7 +359,6 @@ std::string micro_get_op_type(std::string & workload_name) {
     if (workload_name == define::microLoadDelete) {
         return "DELETE";
     }
-    return 0;
 }
 
 int gf_gen_decode_matrix(unsigned char *encode_matrix,

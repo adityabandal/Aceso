@@ -15,33 +15,42 @@ VM_LIST=(
 # SSH user (replace with your username)
 SSH_USER="adbandal"
 
-# Commands to run on each VM
-# COMMANDS=$(cat <<EOF
-# echo 'Running commands on $(hostname)';
-# sudo ln -s /dev/nvme0n1p4 /dev/sda4;
-# cd ~;
-# bash setup-sda4.sh;
-# cd ~/home;
-# git clone https://github.com/adityabandal/Aceso.git aceso;
-# cd ~/home/aceso/setup;
-# sudo bash setup-env.sh;
-# sudo reboot;
-# EOF
-# )
-
-# COMMANDS=$(cat <<EOF
-# cd ~/home;
-# git clone https://github.com/adityabandal/Aceso.git aceso;
-# EOF
-# )
-
+Commands to run on each VM
 COMMANDS=$(cat <<EOF
+echo 'Running commands on $(hostname)';
+sudo ln -s /dev/nvme0n1p4 /dev/sda4;
+cd ~;
+bash setup-sda4.sh;
 cd ~/home;
 git clone https://github.com/adityabandal/Aceso.git aceso;
-cd ~/home/aceso && mkdir build && cd build;
-cmake .. && make -j;
+cd ~/home/aceso/setup;
+sudo bash setup-env.sh;
+sudo reboot;
 EOF
 )
+
+# COMMANDS=$(cat <<EOF
+# cd ~/home;
+# git clone https://github.com/adityabandal/Aceso.git aceso;
+# EOF
+# )
+
+# COMMANDS=$(cat <<EOF
+# cd ~/home;
+# sudo rm -r aceso;
+# git clone https://github.com/adityabandal/Aceso.git aceso;
+# cd ~/home/aceso && mkdir build && cd build;
+# cmake .. && make -j;
+# EOF
+# )
+
+# COMMANDS=$(cat <<EOF
+# cd ~/home/aceso/build/major-test;
+# touch config.json;
+# }" > config.json
+
+# EOF
+# )
 
 
 
@@ -58,3 +67,4 @@ done
 wait
 
 echo "All commands executed on all VMs."
+
