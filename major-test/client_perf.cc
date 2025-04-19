@@ -93,6 +93,7 @@ int merge_lat_all() {
             }
         }
     }
+    return 0;
 }
 
 void thread_load(Client *client, std::string workload_name, std::string op_type = "") {

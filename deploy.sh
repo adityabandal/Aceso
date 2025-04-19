@@ -36,6 +36,8 @@ SSH_USER="adbandal"
 # )
 
 COMMANDS=$(cat <<EOF
+cd ~/home;
+git clone https://github.com/adityabandal/Aceso.git aceso;
 cd ~/home/aceso && mkdir build && cd build;
 cmake .. && make -j;
 EOF
