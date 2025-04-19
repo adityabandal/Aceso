@@ -824,6 +824,7 @@ int Client::_write_new_block_meta(CoroContext *ctx, MMBlockRegInfo * reg_info) {
         ror_list[i].size = sizeof(MMBlockMeta);
     }
     network_manager->rdma_write_batches_sync(ror_list, define::memoryNodeNum, ctx);
+    return 0;
 }
 
 int Client::_write_seal_block_meta(CoroContext *ctx, uint64_t block_addr, uint32_t server_id, uint64_t index_ver) {
@@ -842,6 +843,7 @@ int Client::_write_seal_block_meta(CoroContext *ctx, uint64_t block_addr, uint32
     }
 
     network_manager->rdma_write_batches_sync(ror_list, define::memoryNodeNum, ctx);
+    return 0;
 }
 
 int Client::_xor_mem_block(KVReqCtx * ctx, ClientMMBlock * mm_block) {
@@ -1018,7 +1020,7 @@ void Client::_mm_free(uint64_t old_slot) {
     uint64_t add_value = 1 << (subblock_id % 64);
 
     char tmp[256] = {0};
-    sprintf(tmp, "%lu@%d", bmap_addr, slot.server_id);
+    sprintf(tmp, "%lu@%ld", bmap_addr, slot.server_id);
     std::string addr_str(tmp);
     free_bit_map[addr_str] += add_value;
 }

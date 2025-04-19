@@ -1240,6 +1240,7 @@ int NetworkManager::_server_publish_ckpt_qps(void) {
     char time_key[128] = {0}; 
     sprintf(time_key, "server-time-%d", my_server_id);
     _mem_set(time_key, strlen(time_key), (const char *)&init_time, sizeof(uint64_t));
+    return 0;
 }
 
 int NetworkManager::_server_connect_ckpt_qps(void) {
@@ -1247,6 +1248,7 @@ int NetworkManager::_server_connect_ckpt_qps(void) {
         uint32_t tmp_sid = (my_server_id + i) % define::memoryNodeNum;
         _server_connect_one_ckpt_qp(tmp_sid);
     }
+    return 0;
 }
 
 int NetworkManager::_server_connect_one_ckpt_qp(uint32_t server_id) {
@@ -1303,6 +1305,7 @@ int NetworkManager::_server_connect_recover_qps(void) {
         uint32_t tmp_sid = (my_server_id + i) % define::memoryNodeNum;
         _server_connect_one_recover_qp(tmp_sid);
     }
+    return 0;
 }
 
 int NetworkManager::_server_connect_one_recover_qp(uint32_t server_id) {

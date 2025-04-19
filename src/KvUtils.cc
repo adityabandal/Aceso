@@ -146,6 +146,7 @@ int stick_this_thread_to_core(int core_id) {
             printf("thread bind core error, expect core_id %d, get core_id %d\n", core_id, i);
         }
     }
+    return 0;
 }
 
 uint64_t current_time_us() {
@@ -358,6 +359,7 @@ std::string micro_get_op_type(std::string & workload_name) {
     if (workload_name == define::microLoadDelete) {
         return "DELETE";
     }
+    return 0;
 }
 
 int gf_gen_decode_matrix(unsigned char *encode_matrix,

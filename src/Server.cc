@@ -135,6 +135,7 @@ int Server::_recover_server() {
     printf("hash recover: %lu\n",  hash_recover_time_us);   // us
     printf("data recover: %lu %lu\n",  local_block_list.size(), data_recover_time_us);   // us
     printf("check count: %lu\n",   total_check_count);
+    return 0;
 }
 
 int Server::_recover_metadata() {
@@ -160,6 +161,7 @@ int Server::_recover_metadata() {
     network_manager->rdma_read_batches_sync(ror_list, define::memoryNodeNum - 2, nullptr, network_manager->get_ckpt_cq());
 
     _recover_meta_state();
+    return 0;
 }
 
 int Server::_recover_meta_state() {
@@ -193,6 +195,7 @@ int Server::_recover_meta_state() {
         parity_addr += block_size;
     }
     printf("recover_metadata done, totally have %d memory blocks in this MN\n", total_alloc);
+    return 0;
 }
 
 int Server::_recover_index() {
@@ -224,6 +227,7 @@ int Server::_recover_index() {
     printf("index-lblock recover: %lu %lu\n", local_block_list.size(), local_block_us);   // us
     printf("index-rblock recover: %lu %lu\n", remote_block_list.size(), remot_block_us);   // us
     printf("index-check recover: %lu\n",  kv_check_us);
+    return 0;
 }
 
 int Server::_recover_old_index() {
@@ -251,6 +255,7 @@ int Server::_recover_old_index() {
 
     this->index_ver_before_crash = race_root->index_ver;
     printf("recover_index_ckpt done, old index_ver %lu\n", race_root->index_ver);
+    return 0;
 }
 
 int Server::_recover_subtable_state() {
@@ -312,6 +317,7 @@ int Server::_recover_block() {
         }
     }
     _xor_all_block(local_block_list);
+    return 0;
 }
 
 void Server::_convert_addr_to_offset(uint64_t addr, uint64_t *offset, uint64_t *local_offset) {
@@ -536,6 +542,7 @@ int Server::_recover_local_new_block() {
         }
     }
     _xor_all_block(local_block_list);
+    return 0;
 }
 
 void Server::_read_all_block(std::vector<MMBlockRecoverContext> & recover_list) {
@@ -585,6 +592,7 @@ int Server::_recover_remote_new_block() {
         }
     }
     _read_all_block(remote_block_list);
+    return 0;
 }
 
 void Server::_fill_recover_kv_ror(RdmaOpRegion * ror, const std::vector<KVRecoverAddr> & r_addr_list) {
@@ -880,6 +888,7 @@ int Server::_recover_check_one_kv(uint64_t l_kv_addr, uint64_t r_kv_addr, uint32
         race_slot->slot_meta.kv_len = 1;
         race_slot->slot_meta.epoch = header->version.log.epoch;
     }
+    return 0;
 }
 
 int Server::_recover_check_one_block(MMBlockRecoverContext & ctx) {
@@ -901,6 +910,7 @@ int Server::_recover_check_one_block(MMBlockRecoverContext & ctx) {
             total_check_count++;
         }
     }
+    return 0;
 }
 
 int Server::_recover_check_all() {
@@ -1355,6 +1365,7 @@ int Server::server_ckpt_iteration_wait() {
     std::unique_lock<std::mutex> lock(ckpt_send_mutex);
     ckpt_send_cv.wait(lock, [this] { return this->hash_ckpt_send == define::memoryNodeNum - 1; });
     lock.unlock();
+    return 0;
 }
 
 int Server::server_on_connect(const struct KVMsg * request) {

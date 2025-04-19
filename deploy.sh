@@ -22,24 +22,33 @@ SSH_USER="adbandal"
 # cd ~;
 # bash setup-sda4.sh;
 # cd ~/home;
-# git clone https://github.com/dmemsys/Aceso.git aceso;
+# git clone https://github.com/adityabandal/Aceso.git aceso;
 # cd ~/home/aceso/setup;
 # sudo bash setup-env.sh;
 # sudo reboot;
 # EOF
 # )
 
+# COMMANDS=$(cat <<EOF
+# cd ~/home;
+# git clone https://github.com/adityabandal/Aceso.git aceso;
+# EOF
+# )
+
 COMMANDS=$(cat <<EOF
-sudo reboot;
+cd ~/home/aceso && mkdir build && cd build;
+cmake .. && make -j;
 EOF
 )
+
+
 
 
 
 # Loop through each VM in parallel
 for VM in "${VM_LIST[@]}"; do
     echo "Connecting to $VM..."
-    scp ./setup/setup-sda4.sh "${SSH_USER}@${VM}:~/" &
+    # scp ./setup/setup-sda4.sh "${SSH_USER}@${VM}:~/" &
     ssh "${SSH_USER}@${VM}" "${COMMANDS}" &
 done
 
