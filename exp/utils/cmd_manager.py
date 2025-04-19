@@ -18,7 +18,7 @@ FAIL_PROMPT1 = 'Fail'
 FAIL_PROMPT2 = 'fail'
 MMERR_PROMPT = 'this->data_ == this->base_addr_'
 
-CLOVER_MS_IP = '10.10.10.1'
+CLOVER_MS_IP = '10.10.1.1'
 
 class CMDManager(object):
 

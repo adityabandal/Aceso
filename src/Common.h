@@ -93,17 +93,17 @@ namespace define {   // namespace define
     // for exp environment
     constexpr uint32_t memoryNodeNum    = 5;        // [CONFIG]
     constexpr char memoryIPs[16][16] = {            // [CONFIG]
-      "10.10.10.1",
-      "10.10.10.2",
-      "10.10.10.3",
-      "10.10.10.4",
-      "10.10.10.5",
+      "10.10.1.1",
+      "10.10.1.2",
+      "10.10.1.3",
+      "10.10.1.4",
+      "10.10.1.5",
     };
-    constexpr char memcachedIP[16] = "10.10.10.1";  // [CONFIG]
+    constexpr char memcachedIP[16] = "10.10.1.1";  // [CONFIG]
     constexpr char ibDevName[32] = "mlx4_0";        // [CONFIG] r650: mlx5_2;   c6220: mlx4_0
     constexpr uint8_t ibPortId = 1;                 // [CONFIG] r650: 1;        c6220: 1
     constexpr uint8_t ibGidIdx = 0;                 // [CONFIG] r650: 1;        c6220: 0
-    constexpr uint8_t ibConnType = IB;              // [CONFIG] r650: ROCE;     c6220: IB
+    constexpr uint8_t ibConnType = ROCE;              // [CONFIG] r650: ROCE;     c6220: IB
     constexpr uint8_t ibPathMtu = IBV_MTU_1024;     // [CONFIG] r650: 4096;     c6220: 1024
 
     constexpr uint32_t maxNodeNum       = 32;
